@@ -8,7 +8,7 @@ print(labels)
 
 
 
-then it shows:
+(torch 1.4.0  torchvision 0.5.0)then it shows:
 RuntimeError                              Traceback (most recent call last)
 <ipython-input-11-58ad51916996> in <module>()
       1 from detecto import core,utils,visualize
