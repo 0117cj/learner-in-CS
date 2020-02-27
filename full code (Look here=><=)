@@ -1,0 +1,70 @@
+from detecto import core,utils,visualize
+dataset=core.Dataset('lp1/')
+model=core.Model(['renjie','wutian'])
+model.fit(dataset)
+image=utils.read_image('lp1/036.jpg')
+predictions=model.predict(image)
+print(labels)
+
+
+
+then it shows:
+RuntimeError                              Traceback (most recent call last)
+<ipython-input-11-58ad51916996> in <module>()
+      1 from detecto import core,utils,visualize
+      2 dataset=core.Dataset('lp1/')
+----> 3 model=core.Model(['renjie','wutian'])
+      4 model.fit(dataset)
+      5 image=utils.read_image('lp1/036.jpg')
+
+6 frames
+/usr/local/lib/python3.6/dist-packages/detecto/core.py in __init__(self, classes, device)
+    248             self._disable_normalize = True
+    249 
+--> 250         self._model.to(self._device)
+    251 
+    252         # Mappings to convert from string labels to ints and vice versa
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in to(self, *args, **kwargs)
+    423             return t.to(device, dtype if t.is_floating_point() else None, non_blocking)
+    424 
+--> 425         return self._apply(convert)
+    426 
+    427     def register_backward_hook(self, hook):
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in _apply(self, fn)
+    199     def _apply(self, fn):
+    200         for module in self.children():
+--> 201             module._apply(fn)
+    202 
+    203         def compute_should_use_set_data(tensor, tensor_applied):
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in _apply(self, fn)
+    199     def _apply(self, fn):
+    200         for module in self.children():
+--> 201             module._apply(fn)
+    202 
+    203         def compute_should_use_set_data(tensor, tensor_applied):
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in _apply(self, fn)
+    199     def _apply(self, fn):
+    200         for module in self.children():
+--> 201             module._apply(fn)
+    202 
+    203         def compute_should_use_set_data(tensor, tensor_applied):
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in _apply(self, fn)
+    221                 # `with torch.no_grad():`
+    222                 with torch.no_grad():
+--> 223                     param_applied = fn(param)
+    224                 should_use_set_data = compute_should_use_set_data(param, param_applied)
+    225                 if should_use_set_data:
+
+/usr/local/lib/python3.6/dist-packages/torch/nn/modules/module.py in convert(t)
+    421 
+    422         def convert(t):
+--> 423             return t.to(device, dtype if t.is_floating_point() else None, non_blocking)
+    424 
+    425         return self._apply(convert)
+
+RuntimeError: CUDA error: device-side assert triggered
